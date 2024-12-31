@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "preco": 100.00,
+    "nome": "Bolo de Chocolate",
+    "descricao": "Um bolo de chocolate rico e úmido com uma cobertura cremosa de chocolate.",
+    "listaDeIngredientes": "Farinha, açúcar, cacau, bicarbonato de sódio, fermento em pó, sal, ovos, leite, óleo vegetal, extrato de baunilha, água quente, manteiga, açúcar de confeiteiro, cacau em pó, sal, extrato de baunilha, creme de leite",
+    "peso": 1,
+    "imagem": "https://cdn.pixabay.com/imagem/2019/07/28/04/56/sweets-4367937_1280.jpg"
+  },
+  {
+    "id": "2",
+    "preco": 100.00,
+    "nome": "Bolo de Baunilha",
+    "descricao": "Um bolo clássico de baunilha com um creme de manteiga suave e cremoso.",
+    "listaDeIngredientes": "Farinha, açúcar, fermento em pó, bicarbonato de sódio, sal, manteiga, ovos, leite, extrato de baunilha, manteiga, açúcar de confeiteiro, creme de leite",
+    "peso": 1,
+    "imagem": "https://tmbidigitalassetsazure.blob.core.windows.net/wpthumbnailsprod/BEST%20012720%20VanillaCake_thumbnail.jpeg"
+  },
+  {
+    "id": "3",
+    "preco": 100.00,
+    "nome": "Bolo Red Velvet",
+    "descricao": "Um bolo red velvet úmido com uma cobertura de cream cheese azedinha.",
+    "listaDeIngredientes": "Farinha, cacau em pó, bicarbonato de sódio, sal, açúcar, óleo vegetal, ovos, corante alimentar vermelho, extrato de baunilha, vinagre, leite, manteiga, cream cheese, açúcar de confeiteiro, extrato de baunilha",
+    "peso": 1,
+    "imagem": "https://www.rainbownourishments.com/wp-content/uploads/2023/05/vegan-red-velvet-cake-1.jpg"
+  },
+  {
+    "id": "4",
+    "preco": 100.00,
+    "nome": "Bolo de Limão",
+    "descricao": "Um bolo de limão com uma cobertura doce e azedinha de limão.",
+    "listaDeIngredientes": "Farinha, fermento em pó, bicarbonato de sódio, sal, açúcar, manteiga, ovos, leite, extrato de baunilha, raspas de limão, suco de limão, açúcar de confeiteiro, creme de leite",
+    "peso": 1,
+    "imagem": "https://recipesblob.oetker.ca/assets/4ffbde4ec9a0438da9840bd29b73dda4/1272x764/lemon-cake-11.webp"
+  },
+  {
+    "id": "5",
+    "preco": 100.00,
+    "nome": "Bolo de Cenoura",
+    "descricao": "Um bolo de cenoura com especiarias e uma cobertura rica de cream cheese.",
+    "listaDeIngredientes": "Farinha, bicarbonato de sódio, fermento em pó, sal, canela, noz-moscada, cravo, açúcar, óleo vegetal, ovos, cenouras, extrato de baunilha, manteiga, cream cheese, açúcar de confeiteiro, extrato de baunilha",
+    "peso": 1,
+    "imagem": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2Fimagem%2FRecipes%2F2024-02-carrot-cake%2Fcarrot-cake-249_1"
+  },
+  {
+    "id": "6",
+    "preco": 100.00,
+    "nome": "Cheesecake",
+    "descricao": "Um cheesecake cremoso com uma crosta de biscoito e uma cobertura de morango.",
+    "listaDeIngredientes": "Biscoitos, manteiga, açúcar, cream cheese, açúcar, ovos, creme de leite, extrato de baunilha, suco de limão, gelatina, água, morangos, açúcar, água",
+    "peso": 1,
+    "imagem": "https://www.acasaencantada.com.br/wp-content/uploads/2023/06/cheesecake_de_frutas_vermelhas_03.jpeg"
+  }
+]

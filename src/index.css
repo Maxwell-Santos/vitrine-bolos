@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .input-field label {
+    @apply block font-semibold mb-2
+  }
+
+  .input-field input {
+    @apply p-2 border border-[#9e9e9e] rounded-md w-full
+  }
+
+  .input-field input:focus {
+    @apply outline-primary;
+  }
+
+  .is-selected {
+    @apply bg-secondary;
+  }
+
+  p {
+    @apply text-[#454545];
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-h transition-all p-2 px-5 text-[#fff] font-semibold rounded-md;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary-h transition-all p-2 px-5 text-[#fff] rounded-md;
+  }
+}
+
+:root {
+  font-family: 'Poppins';
+  line-height: 1.5;
+  font-weight: 400;
+
+  background-color: rgb(255, 255, 255);
+  color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
