@@ -11,7 +11,7 @@ export function Checkout() {
 
   const [isOpen, setOpen] = useState(false)
 
-  const showTotal = () => {
+  const montarTextoTotal = () => {
     const substantive =
       checkoutContext.bolosEncomendados.length > 1 ? 'itens' : 'item'
     return `${checkoutContext.bolosEncomendados.length} ${substantive}`
@@ -23,7 +23,7 @@ export function Checkout() {
         <span className="text-sm font-inter">Resumo</span>
         <span className="text-xl">
           {formatarMoeda(checkoutContext.total)}
-          <span className="text-sm">/ {showTotal()}</span>
+          <span className="text-sm">/ {montarTextoTotal()}</span>
         </span>
       </div>
       <button
