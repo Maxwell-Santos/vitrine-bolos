@@ -2,8 +2,8 @@ const baseUrl = '/cakes.json'
 
 export class HttpClient {
   static async GetOne<T>(
-    id: string,
-    init?: RequestInit
+    id: number
+    // init?: RequestInit
   ): Promise<T | undefined> {
     try {
       // const response = await fetch(baseUrl + `/${id}`, {
@@ -13,7 +13,7 @@ export class HttpClient {
       const response = await fetch(baseUrl)
       const data = await response.json()
       console.log(data)
-      const cake = data.find((cake: Cake) => cake.id == id)
+      const cake = data.find((cake: Bolo) => cake.id == id)
       return cake
     } catch (error) {
       console.error(error)

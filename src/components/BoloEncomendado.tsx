@@ -15,7 +15,7 @@ export function BoloEncomendado(bolo: EncomendaInterface) {
         <div>
           <b className="mr-3">Peso</b>
           <button className="btn-primary rounded-lg p-1 w-8 h-8">-</button>
-          <span className="mx-4">{bolo.peso} Kg</span>
+          <span className="mx-3">{bolo.peso} Kg</span>
           <button className="btn-primary rounded-lg p-1 w-8 h-8">+</button>
         </div>
 

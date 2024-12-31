@@ -5,6 +5,8 @@ export const CheckoutContext = createContext(
   {} as {
     bolosEncomendados: BoloEncomendado[]
     total: number
+    entrega: Contato & Endereco
+    adicionarInfosEntrega: (entrega: Contato & Endereco) => void
     adicionarNaEncomenda: (novaEncomenda: BoloEncomendado) => void
     removerDaEncomenda: (removerDaEncomenda: BoloEncomendado) => void
   }
@@ -16,8 +18,15 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
   )
   const [total, setTotal] = useState(0)
 
+  const [entrega, setEntrega] = useState<Contato & Endereco>(
+    {} as Contato & Endereco
+  )
+
+  const adicionarInfosEntrega = (entrega: Contato & Endereco) => {
+    setEntrega(entrega)
+  }
+
   const adicionarNaEncomenda = (novaEncomenda: BoloEncomendado) => {
-    console.log(novaEncomenda)
     setBolosEncomendados(encomenda => [...encomenda, novaEncomenda])
   }
 
@@ -50,6 +59,8 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
         bolosEncomendados,
         adicionarNaEncomenda,
         removerDaEncomenda,
+        adicionarInfosEntrega,
+        entrega,
         total,
       }}
     >
