@@ -9,6 +9,7 @@ export function Entrega() {
 
   const [endereco, setEndereco] = useState<Endereco>({} as Endereco)
   const [contato, setContato] = useState<Contato>({} as Contato)
+  const [dataDaEntrega, setDataDaEntrega] = useState<Date>(new Date())
 
   const navegar = useNavigate()
 
@@ -22,29 +23,37 @@ export function Entrega() {
 
   const calcularTempoEstimado = (data: string) => {
     const [ano, mes, dia] = data.split('T')[0].split('-')
+    const [horas, minutos] = data.split('T')[1].split(':')
 
     const hoje = new Date().getTime()
     const dataEntrega = new Date(
       Number(ano),
       Number(mes) - 1,
-      Number(dia)
-    ).getTime()
+      Number(dia),
+      Number(horas),
+      Number(minutos)
+    )
+
+    const dataEntregaTime = dataEntrega.getTime()
 
     const tresDias = 3 * 24 * 60 * 60 * 1000
     const diasMinimosParaEntrega = Math.abs(tresDias + hoje)
 
-    if (dataEntrega < diasMinimosParaEntrega) {
+    if (dataEntregaTime < diasMinimosParaEntrega) {
       Swal.fire({
         icon: 'warning',
         title: 'Prazo',
         text: `Recomendamos que faça seu encomenda com até 3 dias de antecedência`,
       })
+    } else {
+      setDataDaEntrega(dataEntrega)
+      console.log(dataEntrega)
     }
 
-    setAtingiuPrazoMinimo(!(dataEntrega < diasMinimosParaEntrega))
+    setAtingiuPrazoMinimo(!(dataEntregaTime < diasMinimosParaEntrega))
 
     const umDia = 24 * 60 * 60 * 1000
-    const diff = Math.round(Math.abs((hoje - dataEntrega) / umDia))
+    const diff = Math.round(Math.abs((hoje - dataEntregaTime) / umDia))
 
     setDiasFaltando(diff)
   }
@@ -64,19 +73,19 @@ export function Entrega() {
         title: 'Preencha os campos',
         text: 'Preencha todos os campos referente ao endereço',
       })
-
       return
     }
 
-    checkoutContext.adicionarInfosEntrega({ ...endereco, ...contato })
-    navegar('confirmar')
+    checkoutContext.adicionarInfosEntrega({
+      ...endereco,
+      ...contato,
+      dataDaEntrega: dataDaEntrega.toISOString(),
+    })
+    navegar('/confirmar')
   }
   return (
     <>
-      <Link
-        to="/"
-        className="text-secondary font-semibold fixed shadow-md top-2 left-2 bg-bg-color px-3 py-1 rounded-full"
-      >
+      <Link to="/" className="btn-voltar">
         voltar
       </Link>
       <div className="pt-12 p-4 min-h-dvh">

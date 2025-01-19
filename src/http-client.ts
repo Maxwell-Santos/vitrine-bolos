@@ -1,30 +1,30 @@
-const baseUrl = '/cakes.json'
-
 export class HttpClient {
-  static async GetOne<T>(
-    id: number
-    // init?: RequestInit
-  ): Promise<T | undefined> {
+  static async GetOne<T>(id: string): Promise<T | undefined> {
     try {
-      // const response = await fetch(baseUrl + `/${id}`, {
-      //   method: 'GET',
-      //   ...init,
-      // })
-      const response = await fetch(baseUrl)
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/bolos/id=${id}`,
+        {
+          method: 'GET',
+          headers: {
+            'x-api-key': import.meta.env.VITE_API_KEY,
+          },
+        }
+      )
       const data = await response.json()
-      console.log(data)
-      const cake = data.find((cake: Bolo) => cake.id == id)
-      return cake
+
+      return data
     } catch (error) {
       console.error(error)
     }
   }
 
-  static async Get(init?: RequestInit) {
+  static async Get(url: string) {
     try {
-      const response = await fetch(baseUrl, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
         method: 'GET',
-        ...init,
+        headers: {
+          'x-api-key': import.meta.env.VITE_API_KEY,
+        },
       })
       const data = await response.json()
 
@@ -34,11 +34,14 @@ export class HttpClient {
     }
   }
 
-  static async Post(init?: RequestInit) {
+  static async Post(url: string, body: object) {
     try {
-      const response = await fetch(baseUrl, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
         method: 'POST',
-        ...init,
+        headers: {
+          'x-api-key': import.meta.env.VITE_API_KEY,
+        },
+        body: JSON.stringify(body),
       })
       const data = await response.json()
 

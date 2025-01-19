@@ -18,7 +18,10 @@ export function Checkout() {
   }
 
   return (
-    <div className="sticky bottom-0 z-10 flex items-center justify-between bg-bg-color p-4 border-t-2 border-[#e0e0e0]">
+    <div
+      className="sticky bottom-0 z-10 flex items-center justify-between bg-bg-color p-4 border-t-2 border-[#e0e0e0]"
+      onClick={() => setOpen(true)}
+    >
       <div className="flex flex-col">
         <span className="text-sm font-inter">Resumo</span>
         <span className="text-xl">
@@ -44,7 +47,10 @@ export function Checkout() {
             <ul className="flex-1 overflow-y-auto">
               {checkoutContext.bolosEncomendados.map(bolo => (
                 <li key={bolo.id}>
-                  <BoloEncomendado {...bolo} />
+                  <BoloEncomendado
+                    bolo={bolo}
+                    retrairCheckout={() => setOpen(false)}
+                  />
                 </li>
               ))}
 

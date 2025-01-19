@@ -3,7 +3,7 @@ type Bolo = {
   nome: string
   imagem: string
   descricao: string
-  listaDeIngredientes: string
+  ingredientes: { nome: string; id: string | number }[]
   preco: number
   peso: number
 }

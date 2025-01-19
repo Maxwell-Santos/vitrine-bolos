@@ -1,9 +1,9 @@
-export interface PedidoInterface {
+export interface EncomendaInterface {
   nomeCliente: string
   telefoneCliente: string
   bolos: Bolo[]
   valorFinal: number
-  dataDaEntrega: Date
+  dataDaEntrega: string
   endereco: {
     cidade: string
     bairro: string
