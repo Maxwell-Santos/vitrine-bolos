@@ -13,7 +13,7 @@ export function Vitrine() {
   }, [])
 
   return (
-    <>
+    <div className="px-3">
       <Search />
       <ul>
         {bolos &&
@@ -32,11 +32,11 @@ export function Vitrine() {
               </div>
               <div className="flex flex-col py-2">
                 <span className="font-bold text-xl">{bolo.nome}</span>
-                <p className="font-inter">{bolo.descricao}</p>
+                <p className="font-inter max-w-[400px]">{bolo.descricao}</p>
               </div>
             </li>
           ))}
       </ul>
-    </>
+    </div>
   )
 }

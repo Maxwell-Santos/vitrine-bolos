@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react'
 import { CheckoutContext } from '../context/checkout-context'
 import { formatarMoeda } from '../utils/formatadorMoeda'
-import { Link, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
+import { Voltar } from '../components/BotaoVoltar'
 
 enum StatusEnvioPedido {
   Pendente,
@@ -57,11 +58,10 @@ export function Confirmar() {
 
   return (
     <>
-      <Link to="/entrega" className="btn-voltar">
-        voltar
-      </Link>
-      <div className="pt-12 p-4 min-h-dvh flex flex-col">
-        <h2 className="text-3xl font-bold">Sobre a entrega</h2>
+      <Voltar caminho="/entrega" />
+
+      <div className="pt-12 p-5 min-h-dvh flex flex-col">
+        <h2 className="text-2xl font-bold">Sobre a entrega</h2>
 
         <div>
           <h5 className="mb-2 mt-4 font-bold">Encomenda</h5>
@@ -81,8 +81,7 @@ export function Confirmar() {
                     </span>
 
                     <p>
-                      Meu bolo
-                      {bolo.topper && ' terá topper, '}
+                      Meu bolo {bolo.topper && 'terá topper, '}
                       {bolo.papelDeArroz && 'terá papel de arroz, '}
                       {bolo.presente && 'é presente'}
                     </p>
@@ -107,7 +106,7 @@ export function Confirmar() {
             <li></li>
           </ul>
         </div>
-        <div className="mt-10">
+        <div className="mt-5">
           <h5 className="mb-2 font-bold">Endereço da entrega</h5>
           <div>
             <div className="flex flex-col gap-3 mt-2">
@@ -168,9 +167,14 @@ export function Confirmar() {
             </div>
           </div>
         </div>
-        <div className="mt-10">
-          <h5 className="mb-2 font-bold">Prazo de entrega</h5>
+        <div className="my-5">
+          <h5 className="font-bold">Prazo de entrega</h5>
           {prazoDeEntrega}
+        </div>
+
+        <div className="mb-5">
+          <h5 className="font-bold">Total</h5>
+          <span className="">{formatarMoeda(checkoutContext.total)}</span>
         </div>
 
         <button

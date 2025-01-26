@@ -3,7 +3,7 @@ import { Checkout } from './components/Checkout'
 
 function App() {
   return (
-    <div className="min-h-dvh flex flex-col">
+    <div className="min-h-dvh flex flex-col max-w-[1024px] mx-auto">
       <main className="flex-1">
         <Outlet />
       </main>

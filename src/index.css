@@ -4,11 +4,11 @@
 
 @layer utilities {
   .input-field label {
-    @apply block font-semibold mb-2;
+    @apply block mb-2;
   }
 
   .input-field input {
-    @apply p-2 border border-[#9e9e9e] rounded-md w-full disabled:bg-[#e1e1e1] disabled:border-none disabled:text-[#454545];
+    @apply p-2 border border-[#9e9e9e] rounded-md w-full disabled:bg-[#eaeaea] disabled:border-none disabled:text-[#454545];
   }
 
   .input-field input:focus {
@@ -24,7 +24,7 @@
   }
 
   .btn-voltar {
-    @apply text-secondary font-semibold fixed shadow-md top-2 left-2 bg-bg-color px-3 py-1 rounded-full
+    @apply fixed shadow-md top-0 left-0 right-0 bg-bg-color/70 px-3 py-2
   }
 }
 

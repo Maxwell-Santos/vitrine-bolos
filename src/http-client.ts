@@ -2,7 +2,7 @@ export class HttpClient {
   static async GetOne<T>(id: string): Promise<T | undefined> {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/bolos/id=${id}`,
+        `${import.meta.env.VITE_API_URL}/bolos/${id}`,
         {
           method: 'GET',
           headers: {
@@ -36,16 +36,14 @@ export class HttpClient {
 
   static async Post(url: string, body: object) {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'x-api-key': import.meta.env.VITE_API_KEY,
         },
         body: JSON.stringify(body),
       })
-      const data = await response.json()
-
-      return data
     } catch (error) {
       console.error(error)
     }
