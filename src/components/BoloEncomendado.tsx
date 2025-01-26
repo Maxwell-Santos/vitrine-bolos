@@ -43,27 +43,28 @@ export function BoloEncomendado(props: {
         className="absolute top-0 right-0 z-10"
         onClick={removerEncomenda}
       >
-        <span className="material-symbols-outlined text-[#ff7c7c] rounded-full">
-          cancel
-        </span>
+        <img
+          src="/cancel.svg"
+          alt={`Remover o bolo ${bolo.nome} da encomenda`}
+        />
       </button>
       <img
-        className="w-36 h-36 object-cover rounded-md"
+        className="w-24 h-24 object-cover rounded-md"
         src={bolo.imagem}
         alt={bolo.nome}
       />
       <div>
-        <span className="font-bold text-xl">{bolo.nome}</span>
+        <span className="font-semibold text-lg">{bolo.nome}</span>
         <p>{bolo.observacao}</p>
         <div>
-          <b className="mr-3">Peso</b>
+          <span className="mr-5">Peso</span>
           <button
             className="btn-primary rounded-lg p-1 w-8 h-8"
             onClick={diminuir1Kg}
           >
             -
           </button>
-          <span className="mx-3">{peso} Kg</span>
+          <span className="mx-2">{peso} Kg</span>
           <button
             className="btn-primary rounded-lg p-1 w-8 h-8"
             onClick={aumentar1Kg}
@@ -72,7 +73,7 @@ export function BoloEncomendado(props: {
           </button>
         </div>
 
-        <span className="text-primary text-lg">{formatarMoeda(preco)}</span>
+        <p className="">{formatarMoeda(preco)}</p>
       </div>
     </div>
   )

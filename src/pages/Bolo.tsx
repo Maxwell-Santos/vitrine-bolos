@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { HttpClient } from '../http-client'
 import { CheckoutContext } from '../context/checkout-context'
 import { formatarMoeda } from '../utils/formatadorMoeda'
+import { Voltar } from '../components/BotaoVoltar'
 
 enum PesoDoBolo {
   Pequeno = 1,
@@ -80,19 +81,14 @@ export function Bolo() {
   const ingredientes = bolo?.ingredientes?.map(({ nome }) => nome).join(', ')
   return (
     <>
-      <Link
-        to="/"
-        className="text-secondary font-semibold fixed shadow-md top-2 left-2 bg-bg-color px-3 py-1 rounded-full"
-      >
-        voltar
-      </Link>
-      <div className="flex flex-col h-full">
+      <Voltar caminho="/" />
+      <div className="flex flex-col h-full mt-10">
         <img
           src={bolo?.imagem ?? ''}
           alt={bolo?.nome}
           className="shadow-inner w-full h-80 object-cover"
         />
-        <div className="mt-5 p-3 h-full block">
+        <div className="mt-5 p-5 h-full block">
           <h2 className="text-2xl font-bold">{bolo?.nome}</h2>
           <p className="font-inter">{bolo?.descricao}</p>
           <span className="inline-block text-xl mt-2 text-primary font-semibold">
@@ -216,7 +212,7 @@ export function Bolo() {
               </div>
               <div className="flex flex-col gap-2">
                 <span className="font-semibold inline-block">
-                  Observção
+                  Observação
                   <small className="font-normal"> (opcional)</small>
                 </span>
                 <textarea

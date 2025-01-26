@@ -1,8 +1,9 @@
 import { CalendarClock } from 'lucide-react'
 import { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import Swal from 'sweetalert2'
 import { CheckoutContext } from '../context/checkout-context'
+import { Voltar } from '../components/BotaoVoltar'
 
 export function Entrega() {
   const checkoutContext = useContext(CheckoutContext)
@@ -47,7 +48,6 @@ export function Entrega() {
       })
     } else {
       setDataDaEntrega(dataEntrega)
-      console.log(dataEntrega)
     }
 
     setAtingiuPrazoMinimo(!(dataEntregaTime < diasMinimosParaEntrega))
@@ -85,11 +85,10 @@ export function Entrega() {
   }
   return (
     <>
-      <Link to="/" className="btn-voltar">
-        voltar
-      </Link>
-      <div className="pt-12 p-4 min-h-dvh">
-        <h2 className="text-3xl font-bold">Sobre a entrega</h2>
+      <Voltar caminho="/" />
+
+      <div className="pt-12 p-5 min-h-dvh">
+        <h2 className="text-2xl font-bold">Sobre a entrega</h2>
 
         <div className="mt-4">
           <h3 className="font-semibold text-xl text-primary">Contato</h3>

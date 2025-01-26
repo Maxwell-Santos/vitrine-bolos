@@ -13,7 +13,7 @@ export const CheckoutContext = createContext(
     adicionarInfosEntrega: (entrega: Entrega) => void
     adicionarNaEncomenda: (novaEncomenda: BoloEncomendado) => void
     removerDaEncomenda: (removerDaEncomenda: BoloEncomendado) => void
-    efetuarPedido: () => Promise<any>
+    efetuarPedido: () => Promise<void>
   }
 )
 
@@ -32,10 +32,8 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
     setBolosEncomendados(encomenda => [...encomenda, novaEncomenda])
   }
 
-  const removerDaEncomenda = (removerDaEncomenda: BoloEncomendado) => {
-    const index = bolosEncomendados.findIndex(
-      bolo => bolo.id == removerDaEncomenda.id
-    )
+  const removerDaEncomenda = (encomenda: BoloEncomendado) => {
+    const index = bolosEncomendados.findIndex(bolo => bolo.id == encomenda.id)
 
     setBolosEncomendados(encomenda => {
       encomenda.splice(index, 1)
@@ -59,6 +57,7 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
       },
     }
 
+    console.log(corpoEncomenda)
     await HttpClient.Post('/encomendas', corpoEncomenda)
 
     _limparCampos()

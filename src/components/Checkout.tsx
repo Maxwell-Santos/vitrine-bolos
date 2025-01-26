@@ -43,7 +43,7 @@ export function Checkout() {
       >
         <Sheet.Container>
           <Sheet.Header />
-          <Sheet.Content className="p-4">
+          <Sheet.Content className="p-5">
             <ul className="flex-1 overflow-y-auto">
               {checkoutContext.bolosEncomendados.map(bolo => (
                 <li key={bolo.id}>
@@ -66,7 +66,7 @@ export function Checkout() {
                 </button>
               </div>
             </ul>
-            <div className="flex flex-col items-end mb-5">
+            <div className="flex flex-col items-end my-5">
               <p className="text-sm">Total</p>
               <span className="font-semibold text-xl">
                 {formatarMoeda(checkoutContext.total)}
