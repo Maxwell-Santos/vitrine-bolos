@@ -8,9 +8,9 @@ export function Vitrine() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchBolos = async () => setCakes(await HttpClient.Get())
+    const fetchBolos = async () => setCakes(await HttpClient.Get('/bolos'))
     fetchBolos()
-  }, [bolos])
+  }, [])
 
   return (
     <>

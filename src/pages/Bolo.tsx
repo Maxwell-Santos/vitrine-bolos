@@ -58,7 +58,7 @@ export function Bolo() {
     checkoutContext.adicionarNaEncomenda({
       id: bolo.id,
       imagem: bolo.imagem,
-      listaDeIngredientes: bolo.listaDeIngredientes,
+      ingredientes: bolo.ingredientes,
       nome: bolo.nome,
       descricao: bolo.descricao,
       preco: bolo.preco,
@@ -77,6 +77,7 @@ export function Bolo() {
     setForma(pan)
   }
 
+  const ingredientes = bolo?.ingredientes?.map(({ nome }) => nome).join(', ')
   return (
     <>
       <Link
@@ -95,11 +96,12 @@ export function Bolo() {
           <h2 className="text-2xl font-bold">{bolo?.nome}</h2>
           <p className="font-inter">{bolo?.descricao}</p>
           <span className="inline-block text-xl mt-2 text-primary font-semibold">
-            {formatarMoeda(bolo?.preco ?? 0)}
+            {formatarMoeda(bolo?.preco ?? 0)}{' '}
+            <span className="text-sm">Kg</span>
           </span>
           <div className="my-6">
             <span className="font-semibold">Ingredientes: </span>
-            <p className="text-sm">{bolo?.listaDeIngredientes}</p>
+            <p className="text-sm first-letter:capitalize">{ingredientes}</p>
           </div>
           {montarBolo && (
             <div className="border border-primary border-opacity-30 rounded-lg p-4">
