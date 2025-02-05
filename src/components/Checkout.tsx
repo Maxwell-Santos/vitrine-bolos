@@ -9,6 +9,8 @@ export function Checkout() {
   const checkoutContext = useContext(CheckoutContext)
   const navegar = useNavigate()
 
+  const existeEncomenda = checkoutContext.bolosEncomendados.length > 0
+
   const [isOpen, setOpen] = useState(false)
 
   const montarTextoTotal = () => {
@@ -20,7 +22,7 @@ export function Checkout() {
   return (
     <div
       className="sticky bottom-0 z-10 flex items-center justify-between bg-bg-color p-4 border-t-2 border-[#e0e0e0]"
-      onClick={() => setOpen(true)}
+      onClick={() => existeEncomenda && setOpen(true)}
     >
       <div className="flex flex-col">
         <span className="text-sm font-inter">Resumo</span>
@@ -30,7 +32,9 @@ export function Checkout() {
         </span>
       </div>
       <button
-        className="btn-primary mt-auto text-sm"
+        className={`${
+          !existeEncomenda && 'invisible'
+        } btn-primary mt-auto text-sm`}
         onClick={() => setOpen(true)}
       >
         Ver encomenda
@@ -53,18 +57,6 @@ export function Checkout() {
                   />
                 </li>
               ))}
-
-              <div className="border-t-2 border-[#e0e0e0] my-4 flex justify-center p-2">
-                <button
-                  className="text-primary font-semibold"
-                  onClick={() => {
-                    setOpen(false)
-                    navegar('/')
-                  }}
-                >
-                  Adicionar mais
-                </button>
-              </div>
             </ul>
             <div className="flex flex-col items-end my-5">
               <p className="text-sm">Total</p>
@@ -76,7 +68,7 @@ export function Checkout() {
               className="btn-primary font-semibold py-3 mt-auto"
               onClick={() => navegar('/entrega')}
             >
-              Adicionar endereço de entrega
+              {existeEncomenda ? 'Continuar para entrega' : 'Adicionar bolo'}
             </button>
           </Sheet.Content>
         </Sheet.Container>

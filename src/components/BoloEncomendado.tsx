@@ -39,15 +39,6 @@ export function BoloEncomendado(props: {
 
   return (
     <div className="flex gap-6 items-center mb-4 relative overflow-visible">
-      <button
-        className="absolute top-0 right-0 z-10"
-        onClick={removerEncomenda}
-      >
-        <img
-          src="/cancel.svg"
-          alt={`Remover o bolo ${bolo.nome} da encomenda`}
-        />
-      </button>
       <img
         className="w-24 h-24 object-cover rounded-md"
         src={bolo.imagem}
@@ -73,8 +64,15 @@ export function BoloEncomendado(props: {
           </button>
         </div>
 
-        <p className="">{formatarMoeda(preco)}</p>
+        <p>{formatarMoeda(preco)}</p>
       </div>
+
+      <button className="ml-auto" onClick={removerEncomenda}>
+        <img
+          src="/cancel.svg"
+          alt={`Remover o bolo ${bolo.nome} da encomenda`}
+        />
+      </button>
     </div>
   )
 }

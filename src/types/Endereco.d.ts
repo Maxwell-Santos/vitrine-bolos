@@ -1,6 +1,6 @@
 type Endereco = {
   logradouro: string
-  numero: number
+  numero: string
   complemento: string
   cidade: string
   bairro: string

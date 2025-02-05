@@ -57,7 +57,6 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
       },
     }
 
-    console.log(corpoEncomenda)
     await HttpClient.Post('/encomendas', corpoEncomenda)
 
     _limparCampos()

@@ -3,6 +3,7 @@ import { CheckoutContext } from '../context/checkout-context'
 import { formatarMoeda } from '../utils/formatadorMoeda'
 import { useNavigate } from 'react-router'
 import { Voltar } from '../components/BotaoVoltar'
+import Swal from 'sweetalert2'
 
 enum StatusEnvioPedido {
   Pendente,
@@ -35,11 +36,19 @@ export function Confirmar() {
     try {
       setStatusEnvioPedido(StatusEnvioPedido.Enviando)
       await checkoutContext.efetuarPedido()
-      setStatusEnvioPedido(StatusEnvioPedido.Enviado)
-      navegar('/')
+      // Swal.fire({
+      //   icon: 'success',
+      //   title: 'Encomenda enviada!',
+      //   text: `Obrigada pela preferência! Logo entraremos em contato. Seu pedido será entregue em ${prazoDeEntrega}`,
+      // })
+
+      // navegar('/')
+      // setStatusEnvioPedido(StatusEnvioPedido.Enviado)
     } catch (error) {
       setStatusEnvioPedido(StatusEnvioPedido.Erro)
       console.error(error)
+    } finally {
+      setStatusEnvioPedido(StatusEnvioPedido.Pendente)
     }
   }
 
@@ -179,7 +188,7 @@ export function Confirmar() {
 
         <button
           className="btn-primary w-full block mt-auto"
-          onClick={handleConfirmarPedido}
+          onClick={() => handleConfirmarPedido()}
         >
           {definirTextoBotao()}
         </button>
