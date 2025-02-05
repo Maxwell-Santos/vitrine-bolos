@@ -1,12 +1,16 @@
-import { CalendarClock } from 'lucide-react'
-import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router'
-import Swal from 'sweetalert2'
 import { CheckoutContext } from '../context/checkout-context'
+import { entregaRepository } from '../domain/entrega-repository'
+import { useNavigate } from 'react-router'
+import { useContext, useState } from 'react'
+import { CalendarClock } from 'lucide-react'
 import { Voltar } from '../components/BotaoVoltar'
+import Swal from 'sweetalert2'
+import { EncomendaInterface } from '../interfaces/Encomenda'
 
 export function Entrega() {
   const checkoutContext = useContext(CheckoutContext)
+  const enderecosSalvos = entregaRepository.findMany()
+  enderecosSalvos.splice(3)
 
   const [endereco, setEndereco] = useState<Endereco>({} as Endereco)
   const [contato, setContato] = useState<Contato>({} as Contato)
@@ -16,6 +20,7 @@ export function Entrega() {
 
   const [diasFaltando, setDiasFaltando] = useState(0)
   const [atingiuPrazoMinimo, setAtingiuPrazoMinimo] = useState(false)
+  const [salvarEndereco, setSalvarEndereco] = useState(false)
 
   const newDate = new Date()
   const dataMinima = `${newDate.getFullYear()}-${
@@ -81,7 +86,52 @@ export function Entrega() {
       ...contato,
       dataDaEntrega: dataDaEntrega.toISOString(),
     })
+
+    if (salvarEndereco) {
+      salvarDadosEntregaListener()
+    }
+
     navegar('/confirmar')
+  }
+
+  const handleEscolherEndereco = (
+    dado: Omit<EncomendaInterface, 'bolos' | 'valorFinal' | 'dataDaEntrega'>
+  ) => {
+    setEndereco(dado.endereco)
+    setContato({
+      nomeCliente: dado.nomeCliente,
+      telefoneCliente: dado.telefoneCliente,
+    })
+
+    const nomeInput = document.querySelector('#nome') as HTMLInputElement
+    nomeInput.value = dado.nomeCliente
+
+    const telefoneInput = document.querySelector('#tel') as HTMLInputElement
+    telefoneInput.value = dado.telefoneCliente
+
+    const ruaInput = document.querySelector('#rua-avenida') as HTMLInputElement
+    ruaInput.value = dado.endereco.logradouro
+
+    const numeroInput = document.querySelector('#numero') as HTMLInputElement
+    numeroInput.value = String(dado.endereco.numero)
+
+    const compInput = document.querySelector('#comp') as HTMLInputElement
+    compInput.value = dado.endereco.complemento
+
+    const cidadeInput = document.querySelector('#cidade') as HTMLInputElement
+    cidadeInput.value = dado.endereco.cidade
+
+    const bairroInput = document.querySelector('#bairro') as HTMLInputElement
+    bairroInput.value = dado.endereco.bairro
+  }
+
+  const salvarDadosEntregaListener = () => {
+    const dadosEntrega = {
+      endereco,
+      ...contato,
+    }
+
+    entregaRepository.create(dadosEntrega)
   }
   return (
     <>
@@ -89,6 +139,50 @@ export function Entrega() {
 
       <div className="pt-12 p-5 min-h-dvh">
         <h2 className="text-2xl font-bold">Sobre a entrega</h2>
+
+        {enderecosSalvos.length > 0 && (
+          <div className="mt-4">
+            <h3 className="font-semibold text-primary">Recentes</h3>
+
+            <ul>
+              {enderecosSalvos.map((dado, index) => (
+                <li
+                  key={index}
+                  className="font-inter text-sm mt-2 border border-[#9e9e9e] rounded-md p-3 flex justify-between items-center"
+                >
+                  <div className="flex flex-col">
+                    <span className="font-semibold">{dado.nomeCliente}</span>
+                    <span>
+                      {dado.endereco.logradouro}, {dado.endereco.numero}
+                    </span>
+                    <span>
+                      {dado.endereco.cidade} - {dado.endereco.bairro}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => handleEscolherEndereco(dado)}
+                    className="text-primary"
+                  >
+                    Escolher
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            {enderecosSalvos.length > 3 && (
+              <div className="flex justify-center text-sm">
+                <button
+                  className="bg-primary/10 hover:bg-primary
+                hover:text-[#fff] transition-all flex-1 px-4 py-2 rounded-md text-primary mt-3 font-semibold font-inter"
+                  onClick={() => navegar('/entrega/salvos')}
+                >
+                  Ver todos
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         <div className="mt-4">
           <h3 className="font-semibold text-xl text-primary">Contato</h3>
@@ -143,7 +237,7 @@ export function Entrega() {
                   id="numero"
                   type="number"
                   onBlur={e =>
-                    setEndereco({ ...endereco, numero: Number(e.target.value) })
+                    setEndereco({ ...endereco, numero: e.target.value })
                   }
                 />
               </div>
@@ -180,6 +274,21 @@ export function Entrega() {
                 />
               </div>
             </div>
+
+            {preencheuTodosOsCampos && (
+              <div className="flex align-center gap-2">
+                <input
+                  type="checkbox"
+                  name="salvar-dados"
+                  id="salvar-dados"
+                  className="accent-primary"
+                  onChange={e => setSalvarEndereco(e.target.checked)}
+                />
+                <label className="cursor-pointer" htmlFor="salvar-dados">
+                  Salvar esse endereço
+                </label>
+              </div>
+            )}
           </div>
         </div>
         <div className="mt-5">
