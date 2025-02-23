@@ -59,14 +59,9 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
 
     await HttpClient.Post('/encomendas', corpoEncomenda)
 
-    _limparCampos()
-
-    // console.log(JSON.stringify(corpoEncomenda))
-
-    // const a = `Titulo: Pedido efetuado com sucesso!%0A%0AValor total: R$${total}%0A%0AData da entrega: ${entrega.dataDaEntrega}%0A%0AEndereço de entrega:%0A${entrega.logradouro}, ${entrega.numero} - ${entrega.complemento}%0A${entrega.bairro}, ${entrega.cidade}%0A%0AContato:%0A${entrega.nomeCliente}%0A${entrega.telefoneCliente}`
-    // console.log(a)
-
-    // return await HttpClient.Get(`https://wa.me/5511977761749/?text=${a}`)
+    setTimeout(() => {
+      _limparCampos()
+    }, 2000)
   }
 
   const _limparCampos = () => {

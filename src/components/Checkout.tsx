@@ -19,11 +19,12 @@ export function Checkout() {
     return `${checkoutContext.bolosEncomendados.length} ${substantive}`
   }
 
+  const retrairCheckout = () => {
+    setOpen(false)
+  }
+
   return (
-    <div
-      className="sticky bottom-0 z-10 flex items-center justify-between bg-bg-color p-4 border-t-2 border-[#e0e0e0]"
-      onClick={() => existeEncomenda && setOpen(true)}
-    >
+    <div className="sticky bottom-0 z-10 flex items-center justify-between bg-bg-color p-4 border-t-2 border-[#e0e0e0]">
       <div className="flex flex-col">
         <span className="text-sm font-inter">Resumo</span>
         <span className="text-xl">
@@ -53,7 +54,7 @@ export function Checkout() {
                 <li key={bolo.id}>
                   <BoloEncomendado
                     bolo={bolo}
-                    retrairCheckout={() => setOpen(false)}
+                    retrairCheckout={retrairCheckout}
                   />
                 </li>
               ))}
