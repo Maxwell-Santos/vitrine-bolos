@@ -62,27 +62,6 @@ export function CheckoutProvider({ children }: { children: ReactNode }) {
     setTimeout(() => {
       _limparCampos()
     }, 2000)
-
-    // console.log(JSON.stringify(corpoEncomenda))
-    // const formatador = new Intl.DateTimeFormat('pt-BR', {
-    //   weekday: 'long',
-    //   day: 'numeric',
-    //   month: 'long',
-    //   year: 'numeric',
-    //   hour: 'numeric',
-    //   minute: 'numeric',
-    // })
-
-    // const a = `Titulo: Pedido efetuado com sucesso!%0A%0AValor total: R$${total}%0A%0AData da entrega: ${formatador.format(
-    //   new Date(entrega.dataDaEntrega)
-    // )}%0A%0AEndereço de entrega:%0A${entrega.logradouro}, ${entrega.numero} - ${
-    //   entrega.complemento
-    // }%0A${entrega.bairro}, ${entrega.cidade}%0A%0AContato:%0A${
-    //   entrega.nomeCliente
-    // }%0A${entrega.telefoneCliente}`
-
-    // const res = encodeURIComponent(a)
-    // return await HttpClient.Get(`https://wa.me/5511984706180/?text=${res}`)
   }
 
   const _limparCampos = () => {
