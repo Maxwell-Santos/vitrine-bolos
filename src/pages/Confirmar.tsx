@@ -3,7 +3,6 @@ import { CheckoutContext } from '../context/checkout-context'
 import { formatarMoeda } from '../utils/formatadorMoeda'
 import { useNavigate } from 'react-router'
 import { Voltar } from '../components/BotaoVoltar'
-import Swal from 'sweetalert2'
 
 enum StatusEnvioPedido {
   Pendente,
@@ -19,6 +18,8 @@ export function Confirmar() {
     StatusEnvioPedido.Pendente
   )
 
+  const [botaoHabilitado, setBotaoHabilitado] = useState(true)
+
   const formatadorVisualizacaoData = new Intl.DateTimeFormat('pt-BR', {
     weekday: 'long',
     day: 'numeric',
@@ -29,26 +30,24 @@ export function Confirmar() {
   })
 
   const prazoDeEntrega = formatadorVisualizacaoData.format(
-    new Date(checkoutContext.entrega.dataDaEntrega)
+    new Date(checkoutContext.entrega.dataDaEntrega ?? new Date())
   )
 
   const handleConfirmarPedido = async () => {
+    setStatusEnvioPedido(StatusEnvioPedido.Enviando)
     try {
-      setStatusEnvioPedido(StatusEnvioPedido.Enviando)
+      setBotaoHabilitado(false)
       await checkoutContext.efetuarPedido()
-      // Swal.fire({
-      //   icon: 'success',
-      //   title: 'Encomenda enviada!',
-      //   text: `Obrigada pela preferência! Logo entraremos em contato. Seu pedido será entregue em ${prazoDeEntrega}`,
-      // })
 
-      // navegar('/')
-      // setStatusEnvioPedido(StatusEnvioPedido.Enviado)
+      setStatusEnvioPedido(StatusEnvioPedido.Enviado)
+      setTimeout(() => {
+        navegar('/')
+      }, 2000)
     } catch (error) {
       setStatusEnvioPedido(StatusEnvioPedido.Erro)
       console.error(error)
     } finally {
-      setStatusEnvioPedido(StatusEnvioPedido.Pendente)
+      setBotaoHabilitado(true)
     }
   }
 
@@ -189,6 +188,7 @@ export function Confirmar() {
         <button
           className="btn-primary w-full block mt-auto"
           onClick={() => handleConfirmarPedido()}
+          disabled={!botaoHabilitado}
         >
           {definirTextoBotao()}
         </button>
